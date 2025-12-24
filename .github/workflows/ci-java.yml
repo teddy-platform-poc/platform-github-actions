@@ -3,7 +3,7 @@ name: Continuous Integration
 on:
   workflow_call:
     inputs:
-      java-version:
+      java_version:
         type: string
         required: false
         default: '17'
@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: ${{ inputs['java-version'] }}
+          java-version: ${{ inputs.java_version }}
 
       - name: Detect Java project
         id: detect
