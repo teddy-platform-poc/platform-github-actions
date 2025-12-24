@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: ${{ inputs.java-version }}
+          java-version: ${{ inputs['java-version'] }}
 
       - name: Detect Java project
         id: detect
