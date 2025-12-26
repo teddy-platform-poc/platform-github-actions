@@ -20,6 +20,17 @@ jobs:
           echo "Stage comum de governança executado"
           echo "Tecnologia recebida: ${{ inputs.technology }}"
 
-  technology-ci:
+  technology-ci-java:
+    if: inputs.technology == 'java'
     needs: governance
-    uses: teddy-platform-poc/platform-github-actions/.github/workflows/ci-${{ inputs.technology }}.yml@main
+    uses: teddy-platform-poc/platform-github-actions/.github/workflows/ci-java.yml@main
+
+  technology-ci-node:
+    if: inputs.technology == 'node'
+    needs: governance
+    uses: teddy-platform-poc/platform-github-actions/.github/workflows/ci-node.yml@main
+
+  technology-ci-python:
+    if: inputs.technology == 'python'
+    needs: governance
+    uses: teddy-platform-poc/platform-github-actions/.github/workflows/ci-python.yml@main
