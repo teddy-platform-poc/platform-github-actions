@@ -1,0 +1,63 @@
+name: CD ECS - HML
+
+on:
+  workflow_call:
+    inputs:
+      component_name:
+        description: Nome do componente
+        required: true
+        type: string
+
+      product_name:
+        description: Nome do produto
+        required: true
+        type: string
+
+      product_url:
+        description: URL do produto
+        required: true
+        type: string
+
+      aws_account:
+        description: Conta AWS destino
+        required: true
+        type: string
+
+      database:
+        description: Possui banco de dados
+        required: true
+        type: string
+
+jobs:
+  provision-hml:
+    name: Provisionar ECS (HML)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Início do provisionamento
+        run: |
+          echo "🚀 Iniciando provisionamento ECS - HML"
+          echo "-------------------------------------"
+          echo "Componente: ${{ inputs.component_name }}"
+          echo "Produto: ${{ inputs.product_name }}"
+          echo "URL: https://${{ inputs.product_url }}.teddy360.com.br"
+          echo "Conta AWS: ${{ inputs.aws_account }}"
+          echo "Banco de dados: ${{ inputs.database }}"
+          echo "-------------------------------------"
+
+      - name: Simular criação de recursos
+        run: |
+          echo "📦 Criando ECS Cluster..."
+          sleep 1
+          echo "📦 Criando ECS Service..."
+          sleep 1
+          echo "📦 Criando Load Balancer..."
+          sleep 1
+          echo "📦 Criando CloudFront..."
+          sleep 1
+          echo "📦 Criando Route53..."
+          sleep 1
+
+      - name: Finalização
+        run: |
+          echo "✅ Provisionamento HML finalizado com sucesso (simulado)"
