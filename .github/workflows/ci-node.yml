@@ -6,10 +6,43 @@ on:
 jobs:
   node-ci:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Node CI placeholder
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
         run: |
-          echo "CI Node executado com sucesso"
+          if [ -f package.json ]; then
+            npm install
+          else
+            echo "package.json não encontrado — placeholder"
+          fi
+
+      - name: Run tests
+        run: |
+          if [ -f package.json ]; then
+            echo "Rodaria testes unitários (npm test)"
+            # npm test
+          else
+            echo "Sem testes — placeholder"
+          fi
+
+      - name: Build application
+        run: |
+          if [ -f package.json ]; then
+            echo "Rodaria build (npm run build)"
+            # npm run build
+          else
+            echo "Sem build — placeholder"
+          fi
+
+      - name: Build artifact (placeholder)
+        run: |
+          echo "Aqui seria gerado artefato ou imagem Docker"
