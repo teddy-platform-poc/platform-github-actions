@@ -1,0 +1,25 @@
+name: CI Platform
+
+on:
+  workflow_call:
+    inputs:
+      technology:
+        description: Tecnologia da aplicação
+        required: true
+        type: string
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Governança - estágio comum
+        run: |
+          echo "Stage comum de governança executado"
+          echo "Tecnologia recebida: ${{ inputs.technology }}"
+
+  technology-ci:
+    needs: governance
+    uses: teddy-platform-poc/platform-github-actions/.github/workflows/ci-${{ inputs.technology }}.yml@main
