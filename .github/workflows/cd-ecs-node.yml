@@ -1,0 +1,42 @@
+name: CD ECS Node
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: Ambiente de deploy (hml | prod)
+        required: true
+        type: string
+
+jobs:
+  deploy-node:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Build da aplicação (placeholder)
+        run: |
+          echo "Aqui seria feito o build da aplicação Node"
+          echo "Ambiente: ${{ inputs.environment }}"
+
+      - name: Build da imagem Docker (placeholder)
+        run: |
+          echo "Aqui seria feito o docker build"
+          echo "Imagem seria tagueada com commit SHA"
+
+      - name: Push para ECR (placeholder)
+        run: |
+          echo "Aqui seria feito o push da imagem para o ECR"
+          echo "Usando credenciais AWS via OIDC"
+
+      - name: Deploy ECS via Terraform (placeholder)
+        run: |
+          echo "Aqui seria executado terraform apply"
+          echo "Atualizando Task Definition e Service no ECS"

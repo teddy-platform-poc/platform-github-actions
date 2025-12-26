@@ -1,0 +1,19 @@
+name: CD
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Ambiente de deploy
+        required: true
+        type: choice
+        options:
+          - hml
+          - prod
+
+jobs:
+  deploy:
+    uses: teddy-platform-poc/platform-github-actions/.github/workflows/cd-platform.yml@main
+    with:
+      technology: node
+      environment: ${{ inputs.environment }}
