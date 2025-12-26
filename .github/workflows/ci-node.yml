@@ -1,0 +1,15 @@
+name: CI Node
+
+on:
+  workflow_call:
+
+jobs:
+  node-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node CI placeholder
+        run: |
+          echo "CI Node executado com sucesso"
