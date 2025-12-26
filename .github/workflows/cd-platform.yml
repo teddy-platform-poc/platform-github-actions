@@ -4,12 +4,12 @@ on:
   workflow_call:
     inputs:
       technology:
-        description: Tecnologia da aplicação (node | java | python)
+        description: Tecnologia da aplicação
         required: true
         type: string
 
       environment:
-        description: Ambiente de deploy
+        description: Ambiente de deploy (hml | prod)
         required: true
         type: string
 
@@ -23,7 +23,7 @@ jobs:
 
       - name: Validação de ambiente
         run: |
-          echo "Validando ambiente informado: ${{ inputs.environment }}"
+          echo "Validando ambiente: ${{ inputs.environment }}"
 
           if [[ "${{ inputs.environment }}" != "hml" && "${{ inputs.environment }}" != "prod" ]]; then
             echo "Ambiente inválido!"
@@ -32,12 +32,27 @@ jobs:
 
       - name: Governança de deploy
         run: |
-          echo "Executando validações de governança de CD"
+          echo "Governança de CD executada"
           echo "Tecnologia: ${{ inputs.technology }}"
           echo "Ambiente: ${{ inputs.environment }}"
 
-  deploy:
+  deploy-node:
+    if: inputs.technology == 'node'
     needs: governance
-    uses: teddy-platform-poc/platform-github-actions/.github/workflows/cd-ecs-${{ inputs.technology }}.yml@main
+    uses: teddy-platform-poc/platform-github-actions/.github/workflows/cd-ecs-node.yml@main
+    with:
+      environment: ${{ inputs.environment }}
+
+  deploy-java:
+    if: inputs.technology == 'java'
+    needs: governance
+    uses: teddy-platform-poc/platform-github-actions/.github/workflows/cd-ecs-java.yml@main
+    with:
+      environment: ${{ inputs.environment }}
+
+  deploy-python:
+    if: inputs.technology == 'python'
+    needs: governance
+    uses: teddy-platform-poc/platform-github-actions/.github/workflows/cd-ecs-python.yml@main
     with:
       environment: ${{ inputs.environment }}
